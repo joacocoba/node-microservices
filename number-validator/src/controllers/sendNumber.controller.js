@@ -14,7 +14,6 @@ const sendNumberController = (req, res) => {
   if (numberInfo.type === "even") {
     sendNumberToServer(numberInfo);
   } else {
-    console.log(number);
     sendNumberToServer(numberInfo);
   }
 

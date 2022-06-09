@@ -11,23 +11,23 @@ beforeEach(async () => {
 const batchOdds = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
 
 describe("GET to /lastNumbers", () => {
-  test("Should respond with 400 (Bad Request) if we don't send a type", async () => {
-    await request(app).get("/lastNumbers").send().expect(400);
+  test("Should respond with 404 (Not Found) if we don't send a type", async () => {
+    await request(app).get("/lastNumbers").send().expect(404);
   });
 
   test("Should respond with 400 (Bad Request) if we send a WRONG type", async () => {
-    await request(app).get("/lastNumbers").send({ type: "Wrong" }).expect(400);
+    await request(app).get("/lastNumbers/wrong").send().expect(400);
   });
 
   test("Should respond with 204 (No content) if it has no records", async () => {
-    await request(app).get("/lastNumbers").send({ type: "even" }).expect(204);
+    await request(app).get("/lastNumbers/even").send().expect(204);
   });
 
   test("Should send me only 1 document with 10 numbers", async () => {
     await Odd.create({ batchOfNumbers: batchOdds });
     const response = await request(app)
-      .get("/lastNumbers")
-      .send({ type: "odd" })
+      .get("/lastNumbers/odd")
+      .send()
       .expect(200);
 
     expect(response.body[0].batchOfNumbers.length).toBe(10);
