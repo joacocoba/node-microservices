@@ -25,9 +25,9 @@ const sendNumberController = require("../controllers/sendNumber.controller");
  *      description: "Endpoint used to send numbers, which will be validated and if they pass the validations they will be incorporated into the database."
  *      responses:
  *          "200":
- *              description: "Worked well"
+ *              description: "OK"
  *          "400":
- *              description: "Invalid input"
+ *              description: "Bad Request. It has to be a number."
  */
 router.post("/", sendNumberController);
 

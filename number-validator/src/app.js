@@ -5,7 +5,7 @@ const numberRoutes = require("./routes/numbers.routes");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
-const swaggerOptions = {
+const swaggerSpec = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
@@ -14,17 +14,17 @@ const swaggerOptions = {
       contact: {
         name: "Joaquin Caubarrere",
       },
-      servers: [
-        {
-          url: "http:localhost:3000",
-        },
-      ],
     },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
   },
   apis: [`${path.join(__dirname, "./routes/*.js ")}`],
 };
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const swaggerDocs = swaggerJsDoc(swaggerSpec);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 const publicDirectory = path.join(__dirname, "../public");
@@ -35,7 +35,5 @@ app.use(express.static(publicDirectory));
 require("./sockets/socket");
 
 app.use("/sendNumber", numberRoutes);
-
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = app;

@@ -2,7 +2,7 @@ const Even = require("../models/Even");
 const Odd = require("../models/Odd");
 
 const lastNumbersController = async (req, res) => {
-  const { type } = req.body;
+  const { type } = req.params;
   const sort = {
     createdAt: -1,
   };
